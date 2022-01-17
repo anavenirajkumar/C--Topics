@@ -1,0 +1,374 @@
+---------------------- SQL ----------------------
+Syntax to Create a New Login Details
+
+CREATE LOGIN <LOGIN NAME> WITH PASSWORD='<PASSWORD>';
+
+CREATE LOGIN RAJKUMAR WITH PASSWORD='1234'
+
+
+--------------- Create a New Database ---------------
+SYNTAX:
+
+CREATE DATABASE <DB NAME>
+CREATE DATABSE MYCLASSDB;
+
+-------------- SUB-LANGUAGES OF SQL -------------
+1)DDL (Data-Defnation-Language) --> CREATE,ALTER,SP_RENAME,TRUNCATE & DROP COMMANDS.
+2)DML (Data-Manipulation-Language) --> INSERT,UPDATE & DELETE COMMANDS
+3)DQL (Data-Query-Language) --> SELECT COMMAND.
+4)TCL (Transaction-Control-Language) -->COMMIT,ROLLBACK & SAVEPOINT COMMANDS.
+5)DCL (Data-Control-Language) --> GRANT & REVOKE COMMANDS.
+
+
+1) DDL (Data-Defnation-Language)
+================================
+-> CREATE NEW OBJECTS(TABLE,VIEW,SYNONYM,PROCEDURE,FUNCTION,TRIGGER...)
+-> MODIFY THE STRUCTURE OF THE OBJECTS
+-> DROP THE OBJECTS FROM DB.
+
+A) CREATE COMMAND: TO CREATE A NEW DATABASE & TABLE
+---------------------------------------------------
+CREATE DATABASE <DBNAME> and "Excute" Button
+
+CREATE DATABASE MYCLASS
+USE MYCLASS            -> Use Current DATABSE
+
+CREATE TABLE <TABLE NAME>(<COLUMN NAME1><DATATYPE>[SIZE],
+                          <COLUMN NAME1><DATATYPE>[SIZE]...)
+      
+CREATE DATABASE MYCLASS
+USE MYCLASS
+CREATE TABLE EMPLOYEE (EMPID INT, EMPNAME CHAR(10),SALARY MONEY,AGE TINYINT)      -> Create Table with 4 Columns and "Excute" Button
+
+Syntax to View Structure of a Table
+-----------------------------------
+SP_HELP <TABLE NAME>
+SP_HELP EMPLOYEE -> Only Excute this single command
+
+B) ALTER COMMAND (change, add ,for existing table like Column Names etc...)
+----------------
+-> How to Change Datatype and Also Size of the Datatype.
+-> How to Add a New Column to the Table.
+-> How to Change a Column Name.
+-> How to Drop the Unwanted Columns from Table
+
+SUB-COMMANDS OF ALTER:
+----------------------
+
+i) ALTER-ALTER COLUMN (Change Column Names)
+---------------------
+To Change Datatype and Also Size of the DataType.
+
+Syntax -> ALTER TABLE <TN> ALTER COLUMN <COLUMN NAME><NEW DATATYPE>[NEW SIZE];
+
+ALTER TABLE EMPLOYEE ALTER COLUMN ENAME VARCHAR(50) -> I'm Changing ENAME Length Increase
+
+ii) ALTER-ADD ( Add New Columns to the Table Columns)
+-------------
+Syntax -> ALTER TABLE <TN> ADD <NEW COLUMN NAME><DATATYPE>[SIZE];
+
+ALTER TABLE EMPLOYEE ADD EADDRESS VARCHAR(40);
+
+iii) SP_RENAME (Change Column Name & Table Name)
+--------------
+Syntax -> SP_RENAME '<TN>.<OLD COLUMN NAME>', '<NEW COLUMN NAME>';
+
+SP_RENAME 'EMPLOYEE.ENAME','EMPLOYEENAME' -> ENAME was Changed to EMPLOYEENAME (Change Column Name)
+
+SP_RENAME 'EMPLOYEE','EMP' -> EMPLOYEE Table was Changed to EMP (Change Table Name)
+
+iv) ALTER-DROP (Delete Unwanted Columns from the Table)
+--------------
+
+Syntax -> ALTER TABLE <TN> DROP COLUMN <COLUMN NAME>;
+
+ALTER TABLE EMP DROP COLUMN EADDRESS
+
+
+C) TRUNCATE (To Delete All Rows from the Table AT A Time)
+-----------
+*We Cannot Delete a Specific row from the Table
+*It Not Supports "WHERE" Keyword Condition
+
+Syntax -> TRUNCATE TABLE <TN>;
+
+TRUNCATE TABLE EMP
+
+D) DROP ( To Drop a Table)
+
+Syntax -> DROP TABLE <TABLE NAME>;
+
+DROP TABLE EMP
+
+
+------------------------------------------------------------------------------
+2) DML (Data-Manipulation-Language) --> INSERT,UPDATE & DELETE COMMANDS
+------------------------------------------------------------------------------
+
+A) INSERT (To Insert New Values Into a Table)
+
+First Create a Table -> CREATE TABLE STUDENT(STID INT,SNAME VARCHAR(40), SFEE DECIMAL(6,2), AGE TINYINT)
+
+Syntax -> INSERT[INTO] <TN> VALUES(VALUE1,VALUE2,VALUE3,.............);
+
+INSERT INTO STUDENT VALUES(101,'ADAMS',3500,23) -> Inserted Values to the Table
+
+SELECT * FROM STUDENT
+
+B) UPDATE ( Modify the Values)
+* To Update All Rows & Specific Row Data in Table.
+
+Syntax -> UPDATE <TN> SET <COLUMN NAME1>=VALUE1,<COLUMN NAME2=VALUE2
+
+UPDATE STUDENT SET SFEE=5000 WHERE STID=103 -> Update the Specific Column DATA
+
+UPDATE STUDENT SET AGE=26 WHERE AGE IS NULL -> (in AGE Column Where NULL is there I'm Adding,Asign Value -> NULL = 26)
+
+* 'IS' Keyword is Mandatory where NULL There. 
+* 'WHERE' Keyword is Specific Data Value
+
+
+UPDATE STUDENT SET SFEE=800 -> ( SFEE Column All Values Is 8000)
+
+C) DELETE ( Delete All Rows and Specific Row from the Table)
+
+Syntax -> DELETE FROM <TABLE NAME>[WHERE(CONDITION)];
+
+DELETE FROM STUDENT WHERE SNAME='JAMES' -> ( Where JAMES Column is there Delete Row)
+
+DELETE FROM STUDENT WHERE AGE IS NULL -> ( Where AGE Column is NULL Delete Row)
+
+DELETE FROM STUDENT -> ( Delete All Rows without Table Structure)
+
+
+------------------------------------------------------------------------------------
+3) DQL,DRL (Data-Query-Language or Data Retrieving Language) --> SELECT COMMAND
+------------------------------------------------------------------------------------
+A) SELECT
+*Read Data
+*Retrieve Data
+*Display Data
+
+Syntax -> SELECT * / <LIST OF COLUMN NAMES> <TN>
+[WHERE (CONDITION)];
+
+CREATE DATABASE DEMO
+USE DEMO
+CREATE TABLE STUDENT(STID INT, SNAME VARCHAR(40), SFEE DECIMAL(6,2), AGE TINYINT)
+
+SELECT * FROM STUDENT
+
+SELECT * FROM STUDENT WHERE SNAME='SCOTT' -> ( Read Specific Data Row)
+
+SELECT STID,SFEE FROM STUDENT WHERE SNAME='SCOTT' -> ( Read Only Selected Columns and DATA)
+
+RETRIVE METHODS
+---------------
+-> Projection Method (Without Condition Retrieve)
+   SELECT * FROM STUDENT
+   SELECT STID, SNAME, SFEE, AGE FROM STUDENT
+
+-> Selection Method ( With Condition Retrieve)
+   SELECT * FROM STUDENT WHERE SNAME='SCOTT'
+   SELECT STID,SFEE FROM STUDENT WHERE SNAME='SCOTT'
+
+-> Joins ( Retrieve Data from More than One Table)
+ 
+
+IDENTITY(SEED, INCREMENT):IDENTITY(1,1) 
+---------------------------------------
+-> Auto Increment Values On A Column.
+-> SEED (Starting Value of ID). "Default Is 1"
+-> INCREMENT (INCREMENT Value In B/W ID'S."Default Is 1"
+
+-> NUMERIC DATATYPE Columns.(INT, DECIMAL,NUMERIC,....)
+-> A TABLE Contains One IDENTITY Function Only.
+
+ CREATE TABLE EMP(EID INT IDENTITY,ENAME VARCHAR(40),SALARY MONEY)
+ 
+ INSERT INTO EMP VALUES('Rajkumar', 62000)
+
+ INSERT INTO EMP(ENAME,SALARY) VALUES('BB',15000)
+
+ SET INDENTITY_INSERT EMP ON -> ( Set Acceptable Auto Increment)
+ 
+ INSERT INTO EMP(EID, ENAME,SALARY) VALUES(5,'BB',15000)
+
+
+SET OPERATORS
+-------------
+-> To Combined Two or More than Two Select Statements.
+---------------------------------
+-> UNION*
+   To Combined the result of two or more than two select Statements as a Single Unit of Values Without Duplicate Values
+---------------------------------
+-> UNION ALL*
+   To Combined the result of two or more than two select Statements as a Single Unit of Values With Duplicate Values
+---------------------------------
+-> INTERSECT
+   To Return Common Values from the Tables
+---------------------------------
+-> EXCEPT
+   To Returns All Values from the Left Hand Side Table Which are not Found in the Right Hand Table
+
+RULES
+-----
+a) No. Of Columns Should Same with in Both Select Statements.
+b) ORDER Of the Columns Should be Same.
+c) DataTypes Of the Columns Must be Match
+
+CREATE DATABASE MYCLASS
+USE MYCLASS
+CREATE TABLE EMP_HYD (EID INT, ENAME CHAR(20),SALARY MONEY) -> and "Excute" Button
+CREATE TABLE EMP_CHENNAI (EID INT, ENAME CHAR(20),SALARY MONEY) -> and "Excute" Button
+
+EMP_HYD Table
+-------------
+EID    ENAME    SALARY
+101    ADAMS    85000.0000
+102    SCOTT    35000.0000
+103    JAMES    45000.0000
+104    WARNER   15000.0000
+105    ADAMS    12000.0000
+
+
+EMP_CHENNAI Table
+-------------
+EID    ENAME    SALARY
+101    ADAMS    85000.0000
+105    ALLEN    11000.0000
+106    MILLER   98000.0000
+104    WARNER   15000.0000
+105    ADAMS    12000.0000
+
+-----------UNION---------------
+SELECT * FROM EMP_HYD
+UNION
+SELECT * FROM EMP_CHENNAI
+
+SELECT EID,ENAME FROM EMP_HYD
+SELECT EID,ENAME FROM EMP_CHENNAI
+
+----------UNION ALL---------------
+SELECT * FROM EMP_HYD
+UNION ALL
+SELECT * FROM EMP_CHENNAI
+
+----------INTERSECT---------------
+SELECT * FROM EMP_HYD
+INTERSECT
+SELECT * FROM EMP_CHENNAI
+
+----------EXCEPT---------------
+SELECT * FROM EMP_HYD
+EXCEPT
+SELECT * FROM EMP_CHENNAI
+
+SELECT * FROM EMP_CHENNAI
+EXCEPT
+SELECT * FROM EMP_HYD
+
+
+----------------------------------------------------------------------------------------------------------------------------
+Working With Primary Key & Foreign Key 
+----------------------------------------------------------------------------------------------------------------------------
+-> To Make the Relation between two or More than Two Tables.
+
+Conditions
+----------
+a) One Table Should Contains PrimaryKey & Another Table Contains ForeignKey
+b) a Common Column in Both Tables (DEPTNO)
+c) The Common Column DataType Must be Same in Both Tables
+
+CREATE TABLE DEPARTMENT(DEPTNO INT PRIMARY KEY, DNAME VARCHAR(40),LOCATION VARCHAR(40)) ---Parent Table ---
+
+INSERT DEPARTMENT VALUES(10,'DBA','HYD'), (20,'SAP','MUMBAI'),(30,'HR','PUNE')
+
+SELECT * FROM DEPARTMENT
+
+CREATE TABLE EMPLOYEE(EMPID INT, ENAME VARCHAR(40), SALARY MONEY, DEPTNO INT FOREIGN KEY REFERENCES DEPARTMENT(DEPTNO))  ---Child Table---
+
+INSERT EMPLOYEE VALUES (101,'ADAMS',56000,10)
+INSERT EMPLOYEE VALUES (102,'JAMES',45000,20)
+INSERT EMPLOYEE VALUES (103,'SCOTT',23000,30)
+
+SELECT * FROM DEPARTMENT
+SELECT * FROM EMPLOYEE
+
+
+--------------------------------------------------------------------------------------------------
+ Joins
+--------------------------------------------------------------------------------------------------
+-> When we retrieve the data from more than one table
+
+A) ANSI-FORMAT JOINS(NEW STYLE FORMAT): With "ON" keyword Join Condition
+
+-> Syntax : SELECT * / <LIST OF COLUMN NAMES> FROM <TN1> <JOIN KEY> <TN2> ON (JOINING CONDITION);
+
+-> INNER JOIN 
+      * Retrieve the DATA From Multiple Tables Based on an Equality Condition
+      * Common Column
+      * the Common Column DataType Must be Same
+      * Matching Data / Rows.
+
+-> OUTER JOIN
+         *LEFT OUTER JOIN
+         *RIGHT OUTER JOIN
+         *FULL OUTER JOIN
+-> CROSS JOIN
+-> NATURAL JOIN
+
+B) NON-ANSI FORMAT JOINS(OLD STYLE FORMAT) : With "WHERE" Keyword Join Condition
+ 
+-> EQUI-JOIN
+-> NON EQUI-JOIN
+-> SELF JOIN
+
+CREATE TABLE STUDENT(STID INT, SNAME VARCHAR(40),SMAILID VARCHAR(40),COURSEID INT)
+
+STID    SNAME   SMAILID        COURSEID
+101     ADAMS   add@gmail.com   10
+102     JAMES   jay@gmail.com   20
+103     SCOTT   scot@gmail.com  30
+
+CREATE TABLE COURSE(COURSEID INT, CNAME VARCHAR(40),CFEE DECIMAL(6,2))
+
+COURSEID    CNAME            CFEE
+10        SQLSERVER          1200.00
+20         SQL DBA           1500.00
+40         MSBI              3200.00
+50         SAP               2400.00
+
+
+
+--- New Query -> SELECT * FROM STUDENT
+                 SELECT * FROM COURSE
+
+
+SELECT * FROM STUDENT INNER JOIN COURSE ON STUDENT.COURSEID=COURSE.COURSEID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
