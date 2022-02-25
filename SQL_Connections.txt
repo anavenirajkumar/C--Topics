@@ -1,0 +1,80 @@
+
+               // Creating Connection  
+                SqlConnection con = new SqlConnection("data source=.; database=student; integrated security=SSPI");  
+ 
+               // writing sql query or CRUD Operations
+                SqlCommand cm = new SqlCommand("insert into student  
+                (id, name, email, join_date)values('101','Ronald Trump','ronald@example.com','1/12/2017')", con);  
+                
+                // Opening Connection  
+                con.Open();  
+                 
+                // SqlDataAdapter() -> Fetch Data from DATABASE
+
+                // Execute for INSERT Operation or CRUD Operations
+                cm.ExecuteNonQuery();  
+                Console.WriteLine("Record Deleted Successfully");  
+
+                // Displaying a message  
+                Console.WriteLine("Record Inserted Successfully"); 
+ 
+                 // Executing the SQL query and Get Data from DATABASE and Stored the "sdr"
+                SqlDataReader sdr = cm.ExecuteReader();   
+               
+                //State() -> Use in If-Else -> Open, Closed, Executing, Broken...
+
+                // SqlDataReader() -> Discontinued Architecture       
+ 
+                //SqlParameters() -> Usefull to When we working "StoreProcedures"
+
+                // Dataset() -> FrontEnd DATABASE -> Like Data Coming from UI. We can Store the Multiple "Classes or DB Tables Rows and Columns & Values" in Store Dataset
+
+                //SqlTransaction() -> Use For Insert Data to "Multiple Tables" or " Execute Multiple Queries" with ATeTime            
+
+                // DataTable() -> Multiple Tables or Tables
+
+                //DataRow() -> Table Row
+
+                //DataColumn() -> Table Column
+
+                // Iterating Data  
+                while (sdr.Read())  
+                {  
+                    Console.WriteLine(sdr["id"] + " " + sdr["name"]+" "+sdr["email"]); // Displaying Record  
+                }  
+
+                //SqlDataAdapter() -> get DATA From DATABASE
+
+                //Fill() -> not Required DB open(),close() Methods             
+                
+                //Dataset() -> Store them Database Tables
+                
+                // ExecuteScalar() -> Return a Objects Count and Convert to Integer "int"
+                 int TotalRows = (int)cmd.ExecuteScalar()
+                 responce.Write('Total Rows = ' + TotalRows.ToString());
+
+                // Execute for INSERT Operation or CRUD Operations and Return "Integer"
+                ExecuteNonQuery();  
+                Console.WriteLine("Record Deleted Successfully");  
+
+                // ExecuteScaler() -> Used for Agregate function -> sum, avg, count and Return "Object"
+ 
+                //ExecuteReader() -> Used for "DataReader"
+
+                // Executing the SQL query  
+                SqlDataReader sdr = cm.ExecuteReader();  
+                while (sdr.Read())  
+                {  
+                    Console.WriteLine(sdr["name"]+" "+ sdr["email"]);  
+                }  
+
+
+-------------------------------- Connection Oriented vs Disconnect Oriented -------------------------------------
+1) Connection Oriented is Always Connect -> DataReader() -> Connection Oriented
+2) Disconnect Oriented is When we want Require then Connect. otherwise Disconnect.
+--------------------------------------
+1) -> DataReader() -> Connection Oriented -> DataAdapter() -> Disconnect Oriented & DataSet() -> Disconnect Oriented & It Return "Boolean" True or False
+--------------------------------------
+2) -> DataAdapter() -> Disconnect Oriented
+      DataSet() -> Disconnect Oriented
+--------------------------------------
