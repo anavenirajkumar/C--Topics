@@ -1,0 +1,237 @@
+1) Constructors
+---------------
+ * static Constructors Calls Can Direct
+ * Non-Static Constructors Calls "Creating Instance of a Class" -> Program p = new Program();
+
+2) Reference Variables
+---------------------
+ * Program p = new Program();
+ * Program q;
+   q = new Program();
+ * Program r = p; -> Reference Class;
+
+3) Static vs Non-Static
+-----------------------
+
+ class Program {
+  int x = 100;    // Non-Static Variable
+  static y = 200; // Static Variable
+  const z = 300; // constant keyword can calls direct
+
+  static void Main(string[] args){
+    Console.WriteLine(y); // Static Direct Calls 
+
+    Program p = new Program(); // Create Instance of A Class
+      Console.WriteLine(p.x);
+      Console.WriteLine(z); // const keyword can calls direct
+  }
+}
+
+4) Inheritance
+---------------
+* Parent Class -> Parent Class or Super Class	
+* Child Class -> Derivered Class or Sub Class 
+* Parent Class is Must Declare with "public" Keyword, Without "public" keyword Inheritance not working
+* Parent Class is Must Declare "Initial" the Values
+* Child Class Can Access "Parent" Class Members, but Parent Class Can't Access Child Class Members
+* "base" keyword refer to the parent class or Parent class
+
+
+5) Arrays -> Ram Memory = Variable, Heat Memory = Values
+--------------------------------------------------------
+* Array is a class in C#
+* Array is Reference type
+* Array is type which can stores the multiple values
+* Arrays Size is Fixed
+* we can identity with index values
+
+
+6) foreach
+----------
+foreach(DataType Variable in ArrayVariable){
+  work with variables
+}
+* Using foreach we can't print reverse order (Going Only)
+* Can't work with index values
+
+7) Collections
+---------------------------------------------------------------------------
+* Array Drobacks  -> Overcome this problems in Collections
+   -> Same Datatype
+   -> Fixed Size
+   -> Default Values
+--------------------------------------------------------------
+* Collection is a type where it can access multiple DataTypes
+* Automatically Increment or Decrement Size
+* If you want Delete you Can delete
+* using.System.Collections
+
+
+8) Methods
+----------
+1) Normal Method
+2) With Parameters Method
+3) With Return Method
+
+9) Properties
+-------------
+* {get; set;} -> write property, read property
+
+10) Abstraction
+----------------
+* Abstract Class & Interface Doesn't have Body Only "Declaration" Properties, Methods(), No Implementation in "Parent Class"
+* in Child Class Must Override Abstract & Interface "Properties, Methods()"
+
+11) Encapsulation
+-----------------
+* Binding Data ToGether
+* Holding the Data and variables
+* Security
+* {set; get;}
+* {get;} can return the value
+* {set;} can Set the Value, Cannot return the Value
+
+class Encapsulation {
+
+  private string name = "Rajkumar"; // If u Mention "public" Anybody Can Access & Changed the "Value"
+ 
+  public string getName(){ // Return Value
+    return name;
+  }
+}
+
+class Program  {
+  public static void Main(String[] args){
+    Encapsulation encap = new Encapsulation();
+      Console.WriteLine(encap.getName()); // Print the Value
+  }
+}
+
+12) Inheritance
+---------------
+* Parent Class Properties Can Access "Child Class"
+* Cannot Access Child Properties "Parent Class"
+
+
+13) Interface
+--------------
+* Can't Create to Object  "Interface", "Abstract"
+* Must Override or Implement
+
+14) Partial Class and Sealed Class
+-----------------------------------
+* Partial Class
+    -> Using Partial we can devide class into the "Parts"
+    -> Secure Function
+* Sealed Class -> "sealed" class or Method is "Last Implementation" we cannot use it
+--------------
+    -> Selead Method
+    -> Sealed Class
+
+15) Generics<>
+--------------
+* we can pass values to class,method() anything like int,string,object,class it can accept
+* we can declare only "One DataType"
+
+16) Enums(Enumerations)
+-----------------------
+* User Defined Data
+* Stores Group of Constants With "UpperCase"
+* "enum" is Special Class
+* We Can Create Constructers, Variables, Methods
+* We "Cannot" Modify after Declared Enum Values it is "Fixed,Perminent" Values
+* We "Cannot" Create Object
+
+Example:
+ class EnumDemo {
+
+   enum Level {
+     LOW,
+     MEDIUM,
+     HIGH
+   }   
+   public static void Main(Strings[] args) {
+      Level myvar = Leve.LOW; // this is Direct Calling
+      Console.WriteLine(myvar);
+   }
+ }
+
+
+17) Delegates
+-------------
+* Delegates are same like function pointer
+* Method Call Back
+* Events
+* We can Call the Multiple Methods
+* Design Patterns
+* Types : Single, Multicast, Generic Delegates
+* public delegate void name() -> Cannot Return Type
+
+----------------------------------------------------------------------------------------------------------------------------
+18) Polymorphism ---------------------------------- ( Polymorphism ) ------------------------------------------------------
+------------------------------------------- Method OverLoading (Polymorphism) ----------------------------------------------
+* Method OverLoading() -> "One" Method() with different, different "Parameters" (switchvations)  we can Use
+    -> Number of Parameters
+    -> Type of Parameters
+    -> Order of Parameters
+* We Can Apply Instance,Static, Main Methods, and Constuctures
+* We Can Apply "Parent Class, Child Class";
+* Compiler Time Polymorphism
+
+------------------------------------------- Method Overriding (Polymorphism) ------------------------------------------------
+* Method Overriding() -> "Method Name Same & Parameters Same & Return Type Same" in Parent & Child Class
+* We Can Apply Ony "Instance" Methods
+* Run Time Polymorphism
+* Declare "vertual" keyword Method in "Parent Class"
+* Declare "override" keyword in Child Method
+* "Abstract Method" Must Ovveride in Child Classs
+------------------------------------------- Method OverHiding (Polymorphism) ------------------------------------------------
+* OverHiding
+* "new" Keyword Mandatory
+* Method Name Same 
+* Parameters Same
+* Return Type Same 
+* Static Methods Can Apply "Only OverHiding" in Parent & Child Class 
+*Note:- Overhiding oh = new OverhidingTwo();
+Overhiding class Methods Print Only;
+
+
+18) Recursions
+---------------
+using System;    
+namespace InterviewQuestionPart4    
+{    
+   public class Program    
+    {    
+      public static void Main(string[] args)    
+        {    
+            Console.WriteLine("Please Enter a Number");    
+    
+            //read number from user    
+            int number =Convert.ToInt32(Console.ReadLine()); // 5 I Entered   
+    
+            //invoke the static method    
+            double factorial = Factorial(number); // Pass 5 to Method(5)
+    
+            //print the factorial result    
+            Console.WriteLine("You Entered"+ number + "="+ factorial.ToString());    
+    
+        }    
+        public static double Factorial(int number)   // 5  
+        {    
+            if (number == 0)    
+                return 1;    
+    
+            double factorial = 1;    
+            for (int i = number; i >= 1;i-- )    // 5 
+            {    
+                factorial = factorial * i; // Storing factorial = =1 * 5 = 5, 5 * 4 = 20, 20 * 3 = 60, 60 * 2 = 120, 120 * 1 - 120;
+                // 5 * 4 * 3* 2 * 1 = 120 
+            }    
+            return factorial;  // return 120
+        }    
+    }    
+}   
+
+
+
